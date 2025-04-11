@@ -1,46 +1,61 @@
-# Tinder Like App -- Using GraphDB: neo4j
+# Tinder-Like App Using Neo4j Graph Database
 
-## Wrap up what I did
-- This is a Tinder Like App with user authentication and friendly frontend, and used Neo4J as database to store and manage the user relationships(Like/Dislike).
+## Overview
+- This is a Tinder-like application featuring user authentication and a user-friendly interface. The app uses Neo4j as the database to store and manage user relationships (Likes/Dislikes).
 
-- Used `npm run dev` to start the server and it run on local port 3000.
+### Get Started
+- Run the application locally using:  `npm run dev`
+- The application will be available at `http://localhost:3000`.
 
-### Auth -- Kinde
-- I used Kinde to hanlde user authentication, you can choose create one account if you haven't use it before, or just login using email.
+## Why Neo4j
+- Its graph structure is ideal for modeling and querying relationships between users.
+- It efficiently handles complex relationship queries (like finding mutual likes).
+- It scales well for social network-type applications where **relationships** are the primary focus.
+
+## Features and Functionality
+
+### User Authentication with Kinde
+- The application uses Kinde for user authentication:
+- New users can create an account or returning users can log in using email.
 ![Signin/Login](https://github.com/Reneechang17/matching-neo4j/blob/main/static/Signin%20or%20Login.jpg)
 
-- Both signin and login required authentication code.(Directly send to your signin/login email)
+- Both signup and login require an authentication code sent directly to the user's email.
 ![Auth code](https://github.com/Reneechang17/matching-neo4j/blob/main/static/Signin%3A%20Login-Auth.jpg)
 
-### New user add in
-- If new user signin, new user can see all existing users as 'card'.
+### New User Onboarding
+- When a new user signs up, they can view all existing users as swipeable cards.
+- Implemented by `react-tinder-card`.
 ![New User](https://github.com/Reneechang17/matching-neo4j/blob/main/static/New%20user%20can%20see%20all%20existing%20users.jpg)
 
-- And database will create a new user as well.
+- And automatically creates a new user node in the Neo4j database.
 ![New User-DB](https://github.com/Reneechang17/matching-neo4j/blob/main/static/New%20user%20add%20in-db.jpg)
 
-### Operations and results
-- User can choose two operations: 
-- 1. left swipe: that means user dislike other user.
+### User Interactions
+- Users have two primary actions available:
+- 1. Left Swipe (Dislike): Indicates the user is not interested.
+- => A --Dislike--> B
 ![LeftSwipe](https://github.com/Reneechang17/matching-neo4j/blob/main/static/Can%20choose-dislike.jpg)
 
-- 2. right swipe: that means user like other user, and that result 'matched'.
+- 2. Right Swipe (Like): Indicates interest in matching with another user
+- => A --Like--> B
 ![RightSwipe](https://github.com/Reneechang17/matching-neo4j/blob/main/static/Can%20choose-like.jpg)
 
-- And we can see the relationship update in database.
+- All user interactions are recorded as relationships in the Neo4j database.
 ![Operation res- db](https://github.com/Reneechang17/matching-neo4j/blob/main/static/Prev%20relationship-before%20add%20new%20user.jpg)
 
-### If Matched! (That means A 'LIKE' B && B 'LIKE' A)
-- You can see an alert with matched notification!
+### Match Functionality
+- When two users mutually like each other (User A likes User B **AND** User B likes User A):
+- A match notification appears as an alert:
 ![Got matched](https://github.com/Reneechang17/matching-neo4j/blob/main/static/Congrats%20on%20matched~.jpg)
 
-- And see your matched card with `/match`.
-- For example, MinHsin and Hannah like each other, they got matched.
+- Users can view their matches at the `/match` endpoint
+- Example: MinHsin and Hannah liked each other and created a match
 ![See matched1](https://github.com/Reneechang17/matching-neo4j/blob/main/static/When%20two%20matched-1.jpg)
 ![See matched2](https://github.com/Reneechang17/matching-neo4j/blob/main/static/When%20two%20matched-2.jpg)
 
-
-- Database will keep record the new users and new relationships...
+### Database Architecture
+- Neo4j Database will keep record the new users and new relationships...
+- This graph structure makes it easy to query for matches and potential recommendations features.
 ![Result Page-db](https://github.com/Reneechang17/matching-neo4j/blob/main/static/final%20relationship-tinder.jpg)
 
 ----------
